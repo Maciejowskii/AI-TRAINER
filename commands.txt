@@ -1,0 +1,34 @@
+pip install opencv-python
+pip install pywin32
+pip install pyautogui
+
+Robienie screanow ingame:
+    Naciśnij „q”, gdy okno wyjściowe jest aktywne, aby wyjść.
+    Naciśnij „f”, aby zapisać zrzut ekranu jako obraz pozytywowy, naciśnij „d”, aby zapisac jako obraz negatywowy.
+    Czekaj 1 ms w każdej pętli zeby nie wywalic programu
+
+Wygeneruj negatywne obrazki:
+python
+from cascadeutils import generate_negative_description_file
+generate_negative_description_file()
+exit()
+
+Generowanie piozytywnych:
+/.../opencv/build/x64/vc15/bin/opencv_annotation.exe --annotations=pos.txt --images=positive/
+
+Dodawanie obrazow:
+    Kliknij raz, aby ustawić lewy górny róg, a następnie ponownie, aby ustawić prawy dolny róg.
+    Naciśnij „c”, aby potwierdzić.
+    Lub „d”, aby cofnąć poprzednie potwierdzenie.
+    Po zakończeniu kliknij „n”, aby przejść do następnego obrazu.
+    Naciśnij „esc”, aby wyjść.
+    Zakończy się automatycznie po dodaniu adnotacji do wszystkich obrazów
+
+C:/.../opencv/build/x64/vc15/bin/opencv_createsamples.exe -info pos.txt -w 24 -h 24 -num 1000 -vec pos.vec
+
+
+Pierwszy argument do trenowania
+C:/.../opencv/build/x64/vc15/bin/opencv_traincascade.exe -data cascade/ -vec pos.vec -bg neg.txt -numPos 200 -numNeg 100 -numStages 10 -w 24 -h 24
+
+Finalny argument
+C:/.../opencv/build/x64/vc15/bin/opencv_traincascade.exe -data cascade/ -vec pos.vec -bg neg.txt -precalcValBufSize 6000 -precalcIdxBufSize 6000 -numPos 200 -numNeg 1000 -numStages 12 -w 24 -h 24 -maxFalseAlarmRate 0.4 -minHitRate 0.999
