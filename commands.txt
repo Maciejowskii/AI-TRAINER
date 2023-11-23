@@ -2,6 +2,8 @@ pip install opencv-python
 pip install pywin32
 pip install pyautogui
 
+Musicie pobrac biblioteke OpenCV
+
 Robienie screanow ingame:
     Naciśnij „q”, gdy okno wyjściowe jest aktywne, aby wyjść.
     Naciśnij „f”, aby zapisać zrzut ekranu jako obraz pozytywowy, naciśnij „d”, aby zapisac jako obraz negatywowy.
